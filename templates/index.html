@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat with GPT</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .chat-container {
+    width: 800px; /* ⬅️ increased width */
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 30px;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .message-box {
+    height: 500px; /* taller chat box */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fafafa;
+    scroll-behavior: smooth;
+  }
+  .user {
+    background: #e1f5fe;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 70%; /* limit width of message bubbles */
+  }
+  .assistant {
+    background: #dcedc8;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+  }
+  form {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  button {
+    padding: 12px 20px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+
+</head>
+<body>
+  <div class="chat-container">
+    <h2>💬 Chat with GPT</h2>
+
+    <div class="message-box">
+      {% for msg in chat_history %}
+        {% if msg.role == 'user' %}
+          <div class="user"><strong>You:</strong> {{ msg.content }}</div>
+        {% else %}
+          <div class="assistant"><strong>GPT:</strong> {{ msg.content }}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <form method="POST">
+      <input type="text" name="message" placeholder="Type your message..." required>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+  // Auto-scroll to bottom of message box
+  const chatBox = document.querySelector(".message-box");
+  chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+</body>
+</html>
